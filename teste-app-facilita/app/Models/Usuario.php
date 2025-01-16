@@ -11,6 +11,6 @@ class Usuario extends Model
     protected $fillable = [
         'nome', 
         'email', 
-        'numero_registro'
+        'numero_cadastro'
     ];
 }

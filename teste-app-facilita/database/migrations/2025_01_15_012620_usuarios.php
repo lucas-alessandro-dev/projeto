@@ -10,11 +10,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists("usuarios");
+
         Schema::create("usuarios", function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("nome");
             $table->string("email");
-            $table->integer("numero_cadastro");
+            $table->string("numero_cadastro");
             $table->timestamps();
         });
     }
