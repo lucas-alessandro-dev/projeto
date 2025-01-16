@@ -10,7 +10,7 @@
     <div class="container mt-5 d-flex justify-content-center">
         <div class="col-md-6">
             <h2 class="text-center">Cadastro de Livros</h2>
-            <form action="{{ url('/cadastrar-usuario') }}" method="POST">
+            <form action="{{ url('/cadastrar-livro') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="nome">Nome</label>

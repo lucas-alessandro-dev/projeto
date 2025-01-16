@@ -18,11 +18,11 @@ class UsuarioController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'email' => 'required|email|unique:usuarios,email',
-            'numero_cadastro' => 'required|integer|unique:usuarios,numero_cadastro'
+            'numero_cadastro' => 'required|string|unique:usuarios,numero_cadastro'
         ]);
 
         Usuario::create($request->only(['nome', 'email', 'numero_cadastro']));
-        return redirect('lista-de-usuarios');
+        return redirect()->route('usuario.lista')->with('success', 'Usuário cadastrado com sucesso!');
     }
 
     public function show($id) {
@@ -35,18 +35,19 @@ class UsuarioController extends Controller
     }
 
     public function update(Request $request, $id){
-        $usuario = Usuario::find($id);
-        $usuario->nome = $request->nome;
-        $usuario->email = $request->email;
-        $usuario->numero_cadastro = $request->numero_cadastro;
-        $usuario->save();
-        return redirect('lista-de-usuarios');
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'email' => "required|email|unique:usuarios,email,{$id}",
+            'numero_cadastro' => "required|integer|unique:usuarios,numero_cadastro,{$id}"
+        ]);
+        Usuario::findOrFail($id)->update($request->only(['nome','email','numero_cadastro']));
+        return redirect()->route('usuario.edit', $id)->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy($id) {
         $usuario = Usuario::find($id);
         $usuario->delete();
-        return redirect('lista-de-usuarios');
+        return redirect()->route('usuario.lista')->with('success', 'Usuário excluído com sucesso!');
     }
 
     public function listaDeUsuarios() {

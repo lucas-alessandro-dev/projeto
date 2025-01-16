@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UsuarioSeeder extends Seeder
+class UsuarioSeeders extends Seeder
 {
     public function run()
     {
