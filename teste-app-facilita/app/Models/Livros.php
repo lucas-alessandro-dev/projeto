@@ -11,7 +11,8 @@ class Livros extends Model
     protected $fillable = [
         "nome", 
         "autor", 
-        "numero_registro"
+        "numero_registro",
+        "situacao"
     ];
 
 

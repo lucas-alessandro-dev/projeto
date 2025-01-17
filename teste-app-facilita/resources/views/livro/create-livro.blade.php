@@ -24,7 +24,25 @@
                     <label for="numero_registro">Número de registro</label>
                     <input type="text" class="form-control" id="numero_registro" name="numero_registro" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                <div class="form-group">
+                    <label for="id_genero">Gênero</label>
+                    <select class="form-control" id="id_genero" name="id_genero" required>
+                        @foreach($generos as $genero)
+                            <option value="{{ $genero->id }}">{{ $genero->nome }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="situacao">Situação</label>
+                    <select class="form-control" id="situacao" name="situacao" required>
+                        <option value="disponivel">Disponível</option>
+                        <option value="emprestado">Emprestado</option>
+                    </select>
+                </div>
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-primary mr-2">Cadastrar</button>
+                    <a href="{{ route('emprestimos.listar') }}" class="btn btn-secondary">Voltar</a>
+                </div>
             </form>
         </div>
     </div>

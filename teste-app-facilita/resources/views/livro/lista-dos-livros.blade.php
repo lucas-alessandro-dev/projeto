@@ -44,6 +44,7 @@
             </tbody>
         </table>
         <a href="{{ route('livro.create') }}" class="btn btn-success">Adicionar Usuário</a>
+        <a href="{{ route('emprestimos.listar') }}" class="btn btn-primary">Voltar</a>
     </div>
 </body>
 </html>

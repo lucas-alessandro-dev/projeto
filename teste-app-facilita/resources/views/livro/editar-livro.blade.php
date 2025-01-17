@@ -35,6 +35,13 @@
                 <input type="text" class="form-control" id="numero_registro" name="numero_registro" value="{{ $livro->numero_registro }}" required>
             </div>
 
+            <div class="form-group">
+                <label for="situacao">Situação</label>
+                <select class="form-control" id="situacao" name="situacao" required>
+                    <option value="disponivel" {{ $livro->situacao == 'disponivel' ? 'selected' : '' }}>Disponível</option>
+                    <option value="emprestado" {{ $livro->situacao == 'emprestado' ? 'selected' : '' }}>Emprestado</option>
+                </select>
+
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="{{ route('livro.create') }}" class="btn btn-secondary">Cancelar</a>
         </form>

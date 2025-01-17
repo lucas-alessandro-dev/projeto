@@ -1,4 +1,6 @@
 <?php
+
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,11 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create("usuarios", function (Blueprint $table) {
-            $table->bigIncrements("id");
-            $table->string("nome");
-            $table->string("email");
-            $table->string("numero_cadastro");
+        Schema::create('generos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("usuarios");
+        Schema::dropIfExists('generos');
     }
 };
