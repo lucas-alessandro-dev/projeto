@@ -3,8 +3,7 @@ Bem-vindo ao Projeto Facilita
 
 ## Instalação
 1 - navegue até a pasta **teste-app-facilita**: 
-# Projeto Facilita
-Bem-vindo ao Projeto Facilita
+
 
 ## Instalação
 1 - navegue até a pasta **teste-app-facilita**: 
