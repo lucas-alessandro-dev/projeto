@@ -27,8 +27,18 @@ DB_CONNECTION=mysql //não esqueça de trocar para mysql
 # DB_PASSWORD=0000
 ```
 
-4 - Rode o comando: 
+4 - Execute esse comando para criar o BD: 
 ```sh
 php artisan migrate
 ```
 
+5 -  execute esse comando para popular com dados de teste:
+```sh
+php artisan db:seed
+```
+
+6 - Suba o servidor php utilizando o comando:
+```sh
+php artisan serve
+```
+ 
