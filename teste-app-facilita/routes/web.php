@@ -20,7 +20,7 @@ Route::post('/cadastrar-usuario', [UsuarioController::class, 'store'])->name('us
 Route::put('/atualizar-usuario/{id}', [UsuarioController::class, 'update'])->name('usuario.update');
 //livros
 Route::get('/cadastro-de-livros', [LivrosController::class,'index'])->name('livro.create');
-Route::get('/lista-dos-livros', [LivrosController::class, 'listaDosLivros'])->name('livro.lista');
+Route::get('/lista-dos-livros/{id?}', [LivrosController::class, 'listaDosLivros'])->name('livro.lista');
 Route::get('/editar-livro/{id}', [LivrosController::class, 'edit'])->name('livro.edit');
 Route::delete('/delete-livro/{id}', [LivrosController::class, 'destroy'])->name('livro.destroy');
 Route::post('/cadastrar-livro', [LivrosController::class, 'store'])->name('livro.store');

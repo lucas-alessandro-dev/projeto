@@ -30,4 +30,9 @@ class Emprestimo extends Model
     {
         return $this->belongsTo(Livros::class);
     }
+
+    public function genero()
+    {
+        return $this->hasOneThrough(Genero::class, Livros::class, 'id', 'id', 'livro_id', 'genero_id');
+    }
 }

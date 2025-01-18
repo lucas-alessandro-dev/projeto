@@ -16,6 +16,12 @@
             </div>
         @endif
 
+        @if(session('error'))
+            <div class="alert alert-danger">
+            {{ session('error') }}
+            </div>
+        @endif
+
         <form action="{{ route('usuario.update', $usuario->id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -36,7 +42,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{ route('usuario.create') }}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{ route('usuario.lista') }}" class="btn btn-secondary">Voltar</a>
         </form>
     </div>
 </body>

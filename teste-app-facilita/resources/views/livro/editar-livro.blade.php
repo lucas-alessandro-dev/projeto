@@ -12,7 +12,13 @@
         
         @if(session('success'))
             <div class="alert alert-success">
-                {{ session('success') }}
+            {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+            {{ session('error') }}
             </div>
         @endif
 
@@ -41,9 +47,10 @@
                     <option value="disponivel" {{ $livro->situacao == 'disponivel' ? 'selected' : '' }}>Disponível</option>
                     <option value="emprestado" {{ $livro->situacao == 'emprestado' ? 'selected' : '' }}>Emprestado</option>
                 </select>
-
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="{{ route('livro.create') }}" class="btn btn-secondary">Cancelar</a>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <a href="{{ route('livro.lista') }}" class="btn btn-secondary">Voltar</a>
+            </div>
         </form>
     </div>
 </body>

@@ -12,8 +12,11 @@ class Livros extends Model
         "nome", 
         "autor", 
         "numero_registro",
-        "situacao"
+        "situacao",
+        "genero_id",
     ];
 
-
+    public function genero() {
+        return $this->belongsTo(Genero::class);
+    }
 }

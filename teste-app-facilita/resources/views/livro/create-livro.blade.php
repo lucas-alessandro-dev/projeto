@@ -10,6 +10,19 @@
     <div class="container mt-5 d-flex justify-content-center">
         <div class="col-md-6">
             <h2 class="text-center">Cadastro de Livros</h2>
+
+            @if(session('success'))
+                <div class="alert alert-success">
+                {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger">
+                {{ session('error') }}
+                </div>
+            @endif
+
             <form action="{{ url('/cadastrar-livro') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -25,8 +38,8 @@
                     <input type="text" class="form-control" id="numero_registro" name="numero_registro" required>
                 </div>
                 <div class="form-group">
-                    <label for="id_genero">Gênero</label>
-                    <select class="form-control" id="id_genero" name="id_genero" required>
+                    <label for="genero_id">Gênero</label>
+                    <select class="form-control" id="genero_id" name="genero_id" required>
                         @foreach($generos as $genero)
                             <option value="{{ $genero->id }}">{{ $genero->nome }}</option>
                         @endforeach

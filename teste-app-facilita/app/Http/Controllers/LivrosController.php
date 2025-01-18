@@ -16,36 +16,33 @@ class LivrosController extends Controller
 
     public function store(Request $request) {
         try {
-            Livros::create([
-                'nome' => $request->nome, 
-                'autor' => $request->autor, 
-                'numero_registro' => $request->numero_registro, 
-                'situacao' => $request->situacao,
-                'genero_id' => $request->genero_id
+            $validatedData = $request->validate([
+                'nome' => 'required|string|max:255',
+                'autor' => 'required|string|max:255',
+                'numero_registro' => 'required|integer|unique:livros,numero_registro',
+                'situacao' => 'required|string|max:255',
+                'genero_id' => 'required|exists:generos,id'
             ]);
+
+            Livros::create($validatedData);
+            
+            return redirect()->route('livro.lista')->with('success','Livro cadastrado com sucesso!');
         } catch (\Exception $e) {
             return redirect('cadastro-de-livros')->with('error','Erro ao cadastrar livro!');
         }
-
-        return redirect()->route('livro.lista')->with('success','Livro cadastrado com sucesso!');
     }
 
     public function update(Request $request, $id) {
-        // $request->validate([
-        //     'nome'=> 'required|string|max:255',
-        //     'autor'=> 'required|string|max:255',
-        //     'numero_registro'=> 'required|string|max:255',
-        //     'situacao'=> 'required|enum:disponivel,emprestado'
-        // ]);
+        try {
+            if (Livros::where('numero_registro', $request->numero_registro)->where('id', '!=', $id)->exists()) {
+                return redirect()->route('livro.edit', $id)->with('error', 'Número de registro já existe!')->with('refresh', true);
+            }
 
-        // Livros::findOrFail($id)->update([
-        //     'nome'=> $request->nome, 
-        //     'autor'=> $request->autor, 
-        //     'numero_registro'=> $request->numero_registro, 
-        //     'situacao'=> $request->situacao
-        // ]);
-        Livros::findOrFail($id)->update([$request->all()]);
-        return redirect()->route('livro.edit', $id)->with('success', 'Livro atualizado com sucesso!');
+            Livros::findOrFail($id)->update($request->all());
+            return redirect()->route('livro.edit', $id)->with('success', 'Livro atualizado com sucesso!')->with('refresh', true);
+        } catch (\Exception $e) {
+            return redirect()->route('livro.edit', $id)->with('error', 'Erro ao atualizar livro!')->with('refresh', true);
+        }
     }
 
     public function destroy($id) {
@@ -53,18 +50,26 @@ class LivrosController extends Controller
         return redirect()->route('livro.lista')->with('success', 'Livro excluído com sucesso!');
     }
 
-    // public function show($id) {
-    //     Livros::find($id);
-    //     return view('livro.editar-livro', compact('livro'));   
-    // }
-
     public function edit($id) {
         $livro = Livros::find($id);
         return view('livro.editar-livro', compact('livro'))->with('success', 'Livro atualizado com sucesso!');
     }
 
-    public function listaDosLivros() {
-        $livros = Livros::all();
-        return view('livro.lista-dos-livros', ['livros' => $livros]);
+    public function listaDosLivros(Request $request) {
+        $generos = Genero::all();
+        $generoId = $request ? $request->input('genero') : null;
+
+        if ($generoId) {
+            $livros = Livros::leftJoin('generos', 'livros.genero_id', '=', 'generos.id')
+                            ->select('livros.*', 'generos.nome as genero_nome')
+                            ->where('genero_id', $generoId)
+                            ->get();
+        } else {
+            $livros = Livros::leftJoin('generos', 'livros.genero_id', '=', 'generos.id')
+                            ->select('livros.*', 'generos.nome as genero_nome')
+                            ->get();
+        }
+
+        return view('livro.lista-dos-livros', compact('livros', 'generos', 'generoId'));
     }
 }
