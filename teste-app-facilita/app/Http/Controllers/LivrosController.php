@@ -28,7 +28,7 @@ class LivrosController extends Controller
             
             return redirect()->route('livro.lista')->with('success','Livro cadastrado com sucesso!');
         } catch (\Exception $e) {
-            return redirect('cadastro-de-livros')->with('error','Erro ao cadastrar livro!');
+            return redirect('livros/lista')->with('error','Erro ao cadastrar livro!');
         }
     }
 

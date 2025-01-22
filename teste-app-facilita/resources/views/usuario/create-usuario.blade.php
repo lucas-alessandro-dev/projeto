@@ -23,7 +23,7 @@
                 </div>
             @endif
 
-            <form action="{{ url('/cadastrar-usuario') }}" method="POST">
+            <form action="{{ url('/usuarios') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="nome">Nome</label>
